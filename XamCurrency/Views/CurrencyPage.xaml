@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamCurrency.Views.CurrencyPage">
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="labelStyle">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="Medium"/>
+        </Style>
+        <Style TargetType="Label" x:Key="labelStyleTitle">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="Red"/>
+            <Setter Property="FontSize" Value="Large"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      x:Name="listViewCurrency"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="ListViewCurrency_Refreshing"
+                      RowHeight="80">
+                <ListView.Header>
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               Style="{StaticResource labelStyleTitle}"
+                               Text="Pair"/>
+                        <Label Grid.Column="1"
+                               Style="{StaticResource labelStyleTitle}"
+                               Text="High"/>
+                        <Label Grid.Column="2"
+                               Style="{StaticResource labelStyleTitle}"
+                               Text="Low"/>
+                        <Label Grid.Column="3"
+                               Style="{StaticResource labelStyleTitle}"
+                               Text="Current"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                           Style="{StaticResource labelStyle}"
+                                           Text="{Binding pair}"/>
+                                    <Label Grid.Column="1"
+                                           Style="{StaticResource labelStyle}"
+                                           Text="{Binding high}"/>
+                                    <Label Grid.Column="2"
+                                           Style="{StaticResource labelStyle}"
+                                           Text="{Binding low}"/>
+                                    <Label Grid.Column="3"
+                                           Style="{StaticResource labelStyle}"
+                                           Text="{Binding last}"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator x:Name="indicator"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               HeightRequest="50"
+                               WidthRequest="50"
+                               Color="Red"
+                               IsRunning="False"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
